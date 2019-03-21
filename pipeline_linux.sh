@@ -13,10 +13,10 @@ for vcf in $input_vcfs;do
 	mkdir $interm_path
 	python get_subset.py ${input_path}${vcf} $interm_path
 	echo "$(date +"%T") 2) Annotating .vcf with vep"
-	bash loftee_only.sh ${interm_path}${vcf//.vcf/.proband_het_hom_and_X.vcf} ${annot_path}${vcf//.vcf/.proband_het_hom_and_X.loftee.vcf} 8 25000
+	bash loftee_only.sh ${interm_path}${vcf//.vcf/.proband_het_hom_and_X.vcf} ${annot_path}${vcf//.vcf/.proband_het_hom_and_X.loftee.vcf} 4 25000
 	python vep_annot.py -i ${interm_path}${vcf//.vcf/.proband_het_hom_and_X.vcf} \
 			-o ${annot_path} \
-			-f 8 \
+			-f 4 \
 			-b 25000
 	echo "$(date +"%T") 3) Generating comp het, hemi, hom and inherited het .txt files"
 	rm -r ${interm_path}
