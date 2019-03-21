@@ -1,0 +1,12 @@
+#CHROM
+cytoBand
+SYMBOL
+Gene
+HGNC_ID
+ExACpLI
+LOFTEE
+ACMG_recommendations
+OMIM(Gene)
+Orphanet(Gene)
+DDG2P(Gene)
+Cancer_Gene_Census(Gene)

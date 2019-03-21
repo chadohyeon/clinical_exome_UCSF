@@ -1,0 +1,62 @@
+TMEM43	Arrhythmogenic right ventricular cardiomyopathy, type 5	Autosomal dominant
+DSP	Arrhythmogenic right ventricular cardiomyopathy, type 8	Autosomal dominant
+PKP2	Arrhythmogenic right ventricular cardiomyopathy, type 9	Autosomal dominant
+DSG2	Arrhythmogenic right ventricular cardiomyopathy, type 10	Autosomal dominant
+DSC2	Arrhythmogenic right ventricular cardiomyopathy, type 11	Autosomal dominant & Autosomal recessive
+BRCA1	Breast-ovarian cancer, familial 1	Autosomal dominant & Multifactorial
+BRCA2	Breast-ovarian cancer, familial 2	Autosomal dominant & Multifactorial
+SCN5A	Brugada syndrome 1	Autosomal dominant
+RYR2	Catecholaminergic polymorphic ventricular tachycardia	Autosomal dominant
+LMNA	Dilated cardiomyopathy 1A	Autosomal dominant & possible recessive form also
+MYBPC3	Dilated cardiomyopathy 1A	Autosomal dominant & possible recessive form also
+COL3A1	Ehlers-Danlos syndrome type 4	Autosomal dominant
+GLA	Fabry's disease	X-linked
+APC	Familial adenomatous polyposis-1	Autosomal dominant
+MUTYH	Familial adenomatous polyposis-2	Autosomal recessive
+APOB	Familial hypercholesterolemia	Autosomal dominant
+LDLR	Familial hypercholesterolemia	Autosomal dominant
+MYH7	Familial hypertrophic cardiomyopathy 1	Autosomal dominant
+TPM1	Familial hypertrophic cardiomyopathy 3	Autosomal dominant
+MYBPC3	Familial hypertrophic cardiomyopathy 4	Autosomal dominant
+PRKAG2	Familial hypertrophic cardiomyopathy 6	Autosomal dominant
+TNNI3	Familial hypertrophic cardiomyopathy 7	Autosomal dominant
+MYL3	Familial hypertrophic cardiomyopathy 8	Autosomal dominant & Autosomal recessive
+MYL2	Familial hypertrophic cardiomyopathy 10	Autosomal dominant
+ACTC1	Familial hypertrophic cardiomyopathy 11	Autosomal dominant
+RET	Familial medullary thyroid carcinoma	Autosomal dominant
+PCSK9	Hypercholesterolemia, autosomal dominant, 3	Autosomal dominant
+BMPR1A	Juvenile polyposis	Autosomal dominant
+SMAD4	Juvenile polyposis	Autosomal dominant
+TNNT2	Left ventricular noncompaction 6	Autosomal dominant
+TP53	Li-Fraumeni syndrome 1	Autosomal dominant
+TGFBR1	Loeys-Dietz syndrome type 1A	Autosomal dominant
+TGFBR2	Loeys-Dietz syndrome type 1B	Autosomal dominant
+SMAD3	Loeys-Dietz syndrome type 3	Autosomal dominant
+KCNQ1	Long QT syndrome 1	Autosomal dominant
+KCNH2	Long QT syndrome 2	Autosomal dominant
+SCN5A	Long QT syndrome 3	Autosomal dominant
+MLH1	Lynch syndrome	Autosomal dominant
+MSH2	Lynch syndrome	Autosomal dominant
+MSH6	Lynch syndrome	Autosomal dominant
+PMS2	Lynch syndrome	Autosomal dominant
+RYR1	Malignant hyperthermia	Autosomal dominant
+CACNA1S	Malignant hyperthermia	Autosomal dominant
+FBN1	Marfan's syndrome	Autosomal dominant
+MEN1	Multiple endocrine neoplasia, type 1	Autosomal dominant
+RET	Multiple endocrine neoplasia, type 2a/b	Autosomal dominant
+NF2	Neurofibromatosis, type 2	Autosomal dominant
+OTC	Ornithine transcarbamylase deficiency	X-linked
+SDHD	Paragangliomas-1	Autosomal dominant
+SDHAF2	Paragangliomas-2	Autosomal dominant
+SDHC	Paragangliomas-3	Autosomal dominant
+SDHB	Paragangliomas-4	Autosomal dominant
+STK11	Peutz-Jeghers syndrome	Autosomal dominant
+PTEN	PTEN hamartoma tumor syndrome	Autosomal dominant
+RB1	Retinoblastoma	Autosomal dominant
+MYH11	Thoracic aortic aneurysm 4	Autosomal dominant
+ACTA2	Thoracic aortic aneurysm 6	Autosomal dominant
+TSC1	Tuberous sclerosis-1	Autosomal dominant
+TSC2	Tuberous sclerosis-2	Autosomal dominant
+VHL	Von Hippel-Lindau syndrome	Autosomal dominant
+WT1	Wilms tumor	Autosomal dominant
+ATP7B	Wilson disease	Autosomal recessive

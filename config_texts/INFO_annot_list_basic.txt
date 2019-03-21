@@ -1,0 +1,12 @@
+AC
+AF
+AN
+BaseQRankSum
+FS
+GQ_MEAN
+MQ
+MQRankSum
+QD
+ReadPosRankSum
+SOR
+VQSLOD

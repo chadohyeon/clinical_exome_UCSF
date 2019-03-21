@@ -1,0 +1,8 @@
+QUAL:20
+FILTER:PASS
+GQ:99
+het_AB_LL:0.2
+het_AB_UL:0.8
+wt_AB:0.05
+hom_AB:0.95
+AF:0.05
