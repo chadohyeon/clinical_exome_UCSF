@@ -7,8 +7,8 @@ output=$2
 /opt/program/ensembl-vep/vep --assembly GRCh38 --offline --vcf \
 -i $1 \
 -o $2 \
---fork 8 --canonical \
---buffer_size 25000 \
+--fork $3 --canonical \
+--buffer_size $4 \
 --pick --pick_order canonical \
 --force_overwrite \
 --plugin LoF,loftee_path:${path},conservation_file:${path}loftee.sql\
