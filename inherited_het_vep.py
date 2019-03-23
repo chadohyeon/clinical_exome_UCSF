@@ -6,7 +6,6 @@ vcf_input="/Users/dcha/program/vep_data/files/100917_proband_het_vep_annot.vcf"
 info_annot_file="config_texts/INFO_annot_list_vep.txt"
 gene_summary_annot_file="config_texts/gene_summary_annot_list.txt"
 family_file="config_texts/ClinEx_pedigree.txt"
-qc_configure="config_texts/qc_configure.txt"
 gene_additional_annot_list='config_texts/dbNSFP3.5_gene.complete'
 gene_annot_columns='config_texts/gene_summary_annot_list_dbNSFP.txt'
 
@@ -15,24 +14,13 @@ def inherited_heterozygous (vcf, qc_text):
     for i in vcf.keys():
         if vcf[i]['proband']['GT']=='0/1':
             if vcf[i]['father']['GT']=='0/1' and vcf[i]['mother']['GT']=='0/0': het[i]=vcf[i]
-            elif vcf[i]['father']['GT']=='0/0' and vcf[i]['father']['GT']=='0/1': het[i]=vcf[i]
+            elif vcf[i]['father']['GT']=='0/0' and vcf[i]['mother']['GT']=='0/1': het[i]=vcf[i]
 
     # Step2-1: Only containing exonic variants without synonymous SNV or unknown, and splicing variants
-    het_exome={}
-    for i in het.keys():
-        if het[i]['INFO']['IMPACT']=='HIGH' or het[i]['INFO']['IMPACT']=='MODERATE':
-            het_exome[i]=het[i]
+    het_exome=vcf_main_vep.get_exonic_variants(het)
+
     # Step2-2: QC based on given qc criteria configuration file.
-    with open (qc_text) as _qc_criteria:
-        qc_criteria={i.split(':')[0]:i.split(':')[1].strip() for i in _qc_criteria.readlines()}
-    het_exome_qc={}
-    for i in het_exome.keys():
-        if float(het_exome[i]['QUAL'])>=float(qc_criteria['QUAL']):
-            if het_exome[i]['FILTER']==qc_criteria["FILTER"]:
-                if vcf_main_vep.qc_for_each_member(het_exome[i]['proband'], qc_criteria):
-                    if vcf_main_vep.qc_for_each_member(het_exome[i]['father'], qc_criteria):
-                        if vcf_main_vep.qc_for_each_member(het_exome[i]['mother'], qc_criteria):
-                            het_exome_qc[i]=het_exome[i]
+    het_exome_qc=vcf_main_vep.qc_main(het_exome)
     return het_exome_qc
 
 def gene_summary(family_dict, gene_summary_annot_file, output_path):
