@@ -120,22 +120,29 @@ def calculateAB(ad):
     return str(dp), str(ab)
 
 
-def qc_for_each_member(variant,qc_criteria):
+def qc_for_each_member(variant,qc_criteria, GQ_check=False):
     #QC based on each member's GQ and AB based on given qc criteria
     try:
-        if float(variant['GQ']) >= float(qc_criteria['GQ']):
-            if variant['GT']=='0/1':
-                if float(variant['AB']) >= float(qc_criteria['het_AB_LL']):
-                    if float(variant['AB']) <= float(qc_criteria['het_AB_UL']):
-                        return True
-            elif variant['GT']=='0/0':
-                if float(variant['AB']) <= float(qc_criteria['wt_AB']): return True
-            else:
-                if float(variant['AB']) >= float(qc_criteria['hom_AB']): return True
-    except: pass
+        if GQ_check:
+            if float(variant['GQ'] < float(qc_criteria['GQ']) : return False
+        if variant['GT']=='0/1':
+            if float(variant['AB']) >= float(qc_criteria['het_AB_LL']):
+                if float(variant['AB']) <= float(qc_criteria['het_AB_UL']):
+                    return True
+        elif variant['GT']=='0/0':
+            if float(variant['AB']) <= float(qc_criteria['wt_AB']): return True
+        else:
+            if float(variant['AB']) >= float(qc_criteria['hom_AB']): return True
+    except: return False
     return False
 
-
+def qc_GQ_MEAN(fam_variant, qc_criteria):
+    try:
+        GQ_SUM = float(fam_variant['father']['GQ']) + float(fam_variant['mother']['GQ']) + float(fam_variant['proband']['GQ'])
+        GQ_MEAN = GQ_SUM/3.0
+        if GQ_MEAN >= qc_criteria['GQ_MEAN']: return True
+        else: return False
+    except: return False
 
 def variant_summary(vcf, family_dict, info_annot_file, mode, output_path):
        # 'mode' should be comp_het or hemi
