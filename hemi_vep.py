@@ -6,7 +6,6 @@ vcf_input="/Users/dcha/program/vep_data/files/100917_proband_het_vep_annot.vcf"
 info_annot_file="config_texts/INFO_annot_list_vep.txt"
 gene_summary_annot_file="config_texts/gene_summary_annot_list.txt"
 family_file="config_texts/ClinEx_pedigree.txt"
-qc_configure="config_texts/qc_configure.txt"
 gene_additional_annot_list='config_texts/dbNSFP3.5_gene.complete'
 gene_annot_columns='config_texts/gene_summary_annot_list_dbNSFP.txt'
 par_configure="config_texts/par_region.txt"
@@ -18,22 +17,12 @@ def hemizygous(vcf, qc_text, par_text):
                                        and vcf[i]['proband']['GT']!='0/0'}
 
     # Step2-1: Only containing exonic variants without synonymous SNV or unknown, and splicing variants
-    chrx_exome={}
-    for i in chrx.keys():
-        if chrx[i]['INFO']['IMPACT']=='HIGH' or chrx[i]['INFO']['IMPACT']=='MODERATE':
-            chrx_exome[i]=chrx[i]
+    chrx_exome=vcf_main_vep.get_exonic_variants(chrx)
 
     # Step2-2: QC based on given qc criteria configuration file.
-    with open (qc_text) as _qc_criteria:
-        qc_criteria={i.split(':')[0]:i.split(':')[1].strip() for i in _qc_criteria.readlines()}
-    chrx_exome_qc={}
-    for i in chrx_exome.keys():
-        if float(chrx_exome[i]['QUAL'])>=float(qc_criteria['QUAL']):
-            if chrx_exome[i]['FILTER']==qc_criteria["FILTER"]:
-                if vcf_main_vep.qc_for_each_member(chrx_exome[i]['proband'], qc_criteria):
-                    if vcf_main_vep.qc_for_each_member(chrx_exome[i]['father'], qc_criteria):
-                        if vcf_main_vep.qc_for_each_member(chrx_exome[i]['mother'], qc_criteria):
-                            chrx_exome_qc[i]=chrx_exome[i]
+    chrx_exome_qc=vcf_main_vep.get(qc_main(chrx_exome))
+    
+    # Step2-3: Considering zygosity of variants within pseudo-autosomal regions
     chrx_exome_qc_par={}
     with open (par_text) as _hg38_par:
         hg38_par={i.split(':')[0]:i.split(':')[1].strip().split('-') for i in _hg38_par.readlines()}
