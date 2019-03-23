@@ -20,7 +20,7 @@ def hemizygous(vcf, qc_text, par_text):
     chrx_exome=vcf_main_vep.get_exonic_variants(chrx)
 
     # Step2-2: QC based on given qc criteria configuration file.
-    chrx_exome_qc=vcf_main_vep.get(qc_main(chrx_exome))
+    chrx_exome_qc=vcf_main_vep.qc_main(chrx_exome)
     
     # Step2-3: Considering zygosity of variants within pseudo-autosomal regions
     chrx_exome_qc_par={}
