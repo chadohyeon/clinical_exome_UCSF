@@ -2,6 +2,8 @@
 import os
 
 info_annot_basic="config_texts/INFO_annot_list_basic.txt"
+qc_text="config_texts/qc_configure.txt"
+
 def family_check(li, family_file):
     # Reading the ID columns in the joint-vcf and matching it to the pedigree data
     family_dict={}
@@ -119,6 +121,12 @@ def calculateAB(ad):
         ab = int(alt_count) / float(dp)
     return str(dp), str(ab)
 
+def get_exonic_variants(vcf)                     
+    vcf_output={}
+    for i in vcf.keys():
+        if vcf[i]['INFO']['IMPACT']=='HIGH' or vcf[i]['INFO']['IMPACT']=='MODERATE':
+            vcf_output[i]=vcf[i]
+    return vcf_output
 
 def qc_for_each_member(variant,qc_criteria, GQ_check=False):
     #QC based on each member's GQ and AB based on given qc criteria
@@ -144,6 +152,20 @@ def qc_GQ_MEAN(fam_variant, qc_criteria):
         else: return False
     except: return False
 
+def qc_main(vcf)
+    vcf_output={}
+    with open (qc_text) as _qc_criteria:
+        qc_criteria={i.split(':')[0]:i.split(':')[1].strip() for i in _qc_criteria.readlines()}
+    for i in vcf.keys():
+        if float(vcf[i]['QUAL'])>=float(qc_criteria['QUAL']):
+            if vcf[i]['FILTER']==qc_criteria["FILTER"]:
+                if qc_for_each_member(vcf[i]['proband'], qc_criteria):
+                    if qc_for_each_member(vcf[i]['father'], qc_criteria):
+                        if qc_for_each_member(vcf[i]['mother'], qc_criteria):
+                            if qc_GQ_MEAN(vcf[i]):
+                                vcf_output[i]=vcf[i]
+    return vcf_output                
+                     
 def variant_summary(vcf, family_dict, info_annot_file, mode, output_path):
        # 'mode' should be comp_het or hemi
     with open(info_annot_basic) as _info_basic:
