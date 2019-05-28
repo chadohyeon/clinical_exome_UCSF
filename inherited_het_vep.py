@@ -9,7 +9,7 @@ family_file="config_texts/ClinEx_pedigree.txt"
 gene_additional_annot_list='config_texts/dbNSFP3.5_gene.complete'
 gene_annot_columns='config_texts/gene_summary_annot_list_dbNSFP.txt'
 
-def inherited_heterozygous (vcf, qc_text):
+def inherited_heterozygous (vcf):
     het={}
     for i in vcf.keys():
         if vcf[i]['proband']['GT']=='0/1':
@@ -100,7 +100,7 @@ if __name__ == "__main__":
     vcf_input = sys.argv[1]
     outpath = sys.argv[2]
     vcf_dict, fam_dict = vcf_main_vep.vcf_to_dict(vcf_input, info_annot_file, family_file)
-    het_dict = inherited_heterozygous(vcf_dict, qc_configure)
+    het_dict = inherited_heterozygous(vcf_dict)
     vcf_main_vep.variant_summary(het_dict, fam_dict, info_annot_file, "inherited_het", outpath)
     gene_summary(fam_dict, gene_summary_annot_file, outpath)
     vcf_main_vep.gene_additional_annotation(outpath + fam_dict['familyID'] + ".vep_annot.inherited_het.gene_summary.txt",
