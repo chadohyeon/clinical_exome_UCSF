@@ -9,7 +9,7 @@ family_file="config_texts/ClinEx_pedigree.txt"
 gene_additional_annot_list='config_texts/dbNSFP3.5_gene.complete'
 gene_annot_columns='config_texts/gene_summary_annot_list_dbNSFP.txt'
 
-def homozygous (vcf, qc_text, proband_sex):
+def homozygous (vcf, proband_sex):
     hom={i:vcf[i] for i in vcf.keys() if vcf[i]['father']['GT']=='0/1' \
                                       and vcf[i]['mother']['GT']=='0/1' \
                                       and vcf[i]['proband']['GT']=='1/1' }
@@ -98,7 +98,7 @@ if __name__=="__main__":
     vcf_input = sys.argv[1]
     outpath = sys.argv[2]
     vcf_dict,fam_dict=vcf_main_vep.vcf_to_dict(vcf_input, info_annot_file, family_file)
-    hom_dict=homozygous(vcf_dict, qc_configure, fam_dict['probandSex'])
+    hom_dict=homozygous(vcf_dict, fam_dict['probandSex'])
     vcf_main_vep.variant_summary(hom_dict, fam_dict, info_annot_file, "hom", outpath)
     gene_summary(fam_dict, gene_summary_annot_file, outpath)
     vcf_main_vep.gene_additional_annotation(outpath + fam_dict['familyID']+".vep_annot.hom.gene_summary.txt", gene_additional_annot_list, gene_annot_columns)
