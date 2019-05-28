@@ -9,7 +9,7 @@ family_file="config_texts/ClinEx_pedigree.txt"
 gene_additional_annot_list='config_texts/dbNSFP3.5_gene.complete'
 gene_annot_columns='config_texts/gene_summary_annot_list_dbNSFP.txt'
 
-def compound_heterozygous(vcf, qc_text):
+def compound_heterozygous(vcf):
 
     # Step1: Listing all of the proband heterozygous variants
     het={i:vcf[i] for i in vcf.keys() if vcf[i]['proband']['GT']=='0/1'}
@@ -121,7 +121,7 @@ if __name__=="__main__":
     outpath = sys.argv[2]
     vcf_dict,fam_dict=vcf_main_vep.vcf_to_dict(vcf_input, info_annot_file, family_file)
     print("Analyzing family ID "+fam_dict['familyID'])
-    comp_het_dict=compound_heterozygous(vcf_dict, qc_configure)
+    comp_het_dict=compound_heterozygous(vcf_dict)
     vcf_main_vep.variant_summary(comp_het_dict, fam_dict, info_annot_file, "comp_het", outpath)
     gene_summary(fam_dict, gene_summary_annot_file, outpath)
     vcf_main_vep.gene_additional_annotation(outpath + fam_dict['familyID']+".vep_annot.comp_het.gene_summary.txt", gene_additional_annot_list, gene_annot_columns)
