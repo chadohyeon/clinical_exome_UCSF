@@ -10,7 +10,7 @@ gene_additional_annot_list='config_texts/dbNSFP3.5_gene.complete'
 gene_annot_columns='config_texts/gene_summary_annot_list_dbNSFP.txt'
 par_configure="config_texts/par_region.txt"
 
-def hemizygous(vcf, qc_text, par_text):
+def hemizygous(vcf, par_text):
     chrx={i:vcf[i] for i in vcf.keys() if vcf[i]['#CHROM']=='chrX'\
                                        and vcf[i]['father']['GT']=='0/0'\
                                        and vcf[i]['mother']['GT']=='0/1'\
@@ -115,7 +115,7 @@ if __name__=="__main__":
     outpath = sys.argv[2]
     vcf_dict,fam_dict=vcf_main_vep.vcf_to_dict(vcf_input, info_annot_file, family_file)
     if fam_dict['probandSex']=='male':
-        hemi_dict=hemizygous(vcf_dict, qc_configure, par_configure)
+        hemi_dict=hemizygous(vcf_dict, par_configure)
         vcf_main_vep.variant_summary(hemi_dict, fam_dict, info_annot_file, "hemi", outpath)
         gene_summary(fam_dict, gene_summary_annot_file, outpath)
         vcf_main_vep.gene_additional_annotation(outpath + fam_dict['familyID'] + ".vep_annot.hemi.gene_summary.txt",
