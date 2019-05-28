@@ -121,7 +121,7 @@ def calculateAB(ad):
         ab = int(alt_count) / float(dp)
     return str(dp), str(ab)
 
-def get_exonic_variants(vcf)                     
+def get_exonic_variants(vcf):                     
     vcf_output={}
     for i in vcf.keys():
         if vcf[i]['INFO']['IMPACT']=='HIGH' or vcf[i]['INFO']['IMPACT']=='MODERATE':
@@ -132,7 +132,7 @@ def qc_for_each_member(variant,qc_criteria, GQ_check=False):
     #QC based on each member's GQ and AB based on given qc criteria
     try:
         if GQ_check:
-            if float(variant['GQ'] < float(qc_criteria['GQ']) : return False
+            if float(variant['GQ']) < float(qc_criteria['GQ']) : return False
         if variant['GT']=='0/1':
             if float(variant['AB']) >= float(qc_criteria['het_AB_LL']):
                 if float(variant['AB']) <= float(qc_criteria['het_AB_UL']):
@@ -152,7 +152,7 @@ def qc_GQ_MEAN(fam_variant, qc_criteria):
         else: return False
     except: return False
 
-def qc_main(vcf)
+def qc_main(vcf):
     vcf_output={}
     with open (qc_text) as _qc_criteria:
         qc_criteria={i.split(':')[0]:i.split(':')[1].strip() for i in _qc_criteria.readlines()}
