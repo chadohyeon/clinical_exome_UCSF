@@ -162,7 +162,7 @@ def qc_main(vcf):
                 if qc_for_each_member(vcf[i]['proband'], qc_criteria):
                     if qc_for_each_member(vcf[i]['father'], qc_criteria):
                         if qc_for_each_member(vcf[i]['mother'], qc_criteria):
-                            if qc_GQ_MEAN(vcf[i]):
+                            if qc_GQ_MEAN(vcf[i], qc_criteria):
                                 vcf_output[i]=vcf[i]
     return vcf_output                
                      
