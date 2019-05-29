@@ -148,7 +148,7 @@ def qc_GQ_MEAN(fam_variant, qc_criteria):
     try:
         GQ_SUM = float(fam_variant['father']['GQ']) + float(fam_variant['mother']['GQ']) + float(fam_variant['proband']['GQ'])
         GQ_MEAN = GQ_SUM/3.0
-        if GQ_MEAN >= qc_criteria['GQ_MEAN']: return True
+        if GQ_MEAN >= float(qc_criteria['GQ_MEAN']): return True
         else: return False
     except: return False
 
@@ -159,7 +159,7 @@ def qc_main(vcf):
     for i in vcf.keys():
         if float(vcf[i]['QUAL'])>=float(qc_criteria['QUAL']):
             if vcf[i]['FILTER']==qc_criteria["FILTER"]:
-                if qc_for_each_member(vcf[i]['proband'], qc_criteria):
+                if qc_for_each_member(vcf[i]['proband'], qc_criteria, GQ_check=True):
                     if qc_for_each_member(vcf[i]['father'], qc_criteria):
                         if qc_for_each_member(vcf[i]['mother'], qc_criteria):
                             if qc_GQ_MEAN(vcf[i], qc_criteria):
